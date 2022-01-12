@@ -44,7 +44,32 @@
         }
       }
 
-      ReactDOM.render(<Clock />, document.getElementById("root"));
+      class Toggle extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            toggle: false,
+          };
+          this.handleClick = this.handleClick.bind(this);
+        }
+
+        handleClick() {
+          this.setState((state) => ({
+            toggle: !state.toggle,
+          }));
+        }
+
+        render() {
+          return (
+            <div>
+              <p>{this.state.toggle ? "teru" : "fales"}</p>
+              <button onClick={this.handleClick}>click me</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Toggle />, document.getElementById("root"));
     </script>
   </head>
   <body>
