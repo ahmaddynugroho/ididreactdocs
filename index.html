@@ -17,17 +17,34 @@
     ></script>
 
     <script type="text/babel" defer>
-      function tick() {
-        const el = (
-          <div>
-            <h1>hello world!</h1>
-            <h2>it's {new Date().toLocaleTimeString()}</h2>
-          </div>
-        );
-        ReactDOM.render(el, document.getElementById('root'))
+      class Clock extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { date: new Date() };
+        }
+
+        componentDidMount() {
+          // tick the clock
+          this.timerID = setInterval(() => {
+            this.setState({ date: new Date() });
+          }, 1000);
+        }
+
+        componentWillUnmount() {
+          clearInterval(this.timerID);
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>hello world!</h1>
+              <h2>it's {this.state.date.toLocaleTimeString()}</h2>
+            </div>
+          );
+        }
       }
 
-      setInterval(tick, 1000);
+      ReactDOM.render(<Clock />, document.getElementById("root"));
     </script>
   </head>
   <body>
