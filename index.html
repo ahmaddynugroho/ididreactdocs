@@ -52,17 +52,17 @@
           };
         }
 
-        handleClick() {
+        handleClick = () => {
           this.setState((state) => ({
             toggle: !state.toggle,
           }));
-        }
+        };
 
         render() {
           return (
             <div>
               <p>{this.state.toggle ? "teru" : "fales"}</p>
-              <button onClick={() => this.handleClick()}>click me</button>
+              <button onClick={this.handleClick}>click me</button>
             </div>
           );
         }
