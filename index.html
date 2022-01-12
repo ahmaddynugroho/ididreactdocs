@@ -52,7 +52,9 @@
           };
         }
 
-        handleClick = () => {
+        handleClick = (msg, msg2) => {
+          console.log(msg);
+          console.log(msg2);
           this.setState((state) => ({
             toggle: !state.toggle,
           }));
@@ -62,7 +64,11 @@
           return (
             <div>
               <p>{this.state.toggle ? "teru" : "fales"}</p>
-              <button onClick={this.handleClick}>click me</button>
+              <button
+                onClick={this.handleClick.bind(this, "awokawokk", "awikwok")}
+              >
+                click me
+              </button>
             </div>
           );
         }
