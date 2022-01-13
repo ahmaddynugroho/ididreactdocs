@@ -63,10 +63,9 @@
           return (
             <div>
               <Greeting isLoggedIn={this.state.isLoggedIn} />
-              {this.state.isLoggedIn && (
+              {this.state.isLoggedIn ? (
                 <ButtonLoggedIn onClick={this.handleLogout} />
-              )}
-              {!this.state.isLoggedIn && (
+              ) : (
                 <ButtonLoggedOut onClick={this.handleLogin} />
               )}
             </div>
