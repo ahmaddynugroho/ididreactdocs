@@ -26,6 +26,9 @@
       }
 
       function ButtonLoggedIn(props) {
+        if (props.prevent) {
+          return null;
+        }
         return <button onClick={props.onClick}>Logout</button>;
       }
 
@@ -64,7 +67,7 @@
             <div>
               <Greeting isLoggedIn={this.state.isLoggedIn} />
               {this.state.isLoggedIn ? (
-                <ButtonLoggedIn onClick={this.handleLogout} />
+                <ButtonLoggedIn prevent={true} onClick={this.handleLogout} />
               ) : (
                 <ButtonLoggedOut onClick={this.handleLogin} />
               )}
