@@ -17,64 +17,59 @@
     ></script>
 
     <script type="text/babel" defer>
-      class Clock extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = { date: new Date() };
+      function Greeting(props) {
+        const isLoggedIn = props.isLoggedIn;
+        if (isLoggedIn) {
+          return <h1>Welcome back</h1>;
         }
-
-        componentDidMount() {
-          // tick the clock
-          this.timerID = setInterval(() => {
-            this.setState({ date: new Date() });
-          }, 1000);
-        }
-
-        componentWillUnmount() {
-          clearInterval(this.timerID);
-        }
-
-        render() {
-          return (
-            <div>
-              <h1>hello world!</h1>
-              <h2>it's {this.state.date.toLocaleTimeString()}</h2>
-            </div>
-          );
-        }
+        return <h1>Please login</h1>;
       }
 
-      class Toggle extends React.Component {
+      function ButtonLoggedIn(props) {
+        return <button onClick={props.onClick}>Logout</button>;
+      }
+
+      function ButtonLoggedOut(props) {
+        return <button onClick={props.onClick}>Login</button>;
+      }
+
+      class LoginControl extends React.Component {
         constructor(props) {
           super(props);
           this.state = {
-            toggle: false,
+            isLoggedIn: false,
           };
+
+          this.handleLogin = this.handleLogin.bind(this);
+          this.handleLogout = this.handleLogout.bind(this);
         }
 
-        handleClick = (msg, msg2) => {
-          console.log(msg);
-          console.log(msg2);
-          this.setState((state) => ({
-            toggle: !state.toggle,
-          }));
-        };
+        handleLogin() {
+          this.setState({ isLoggedIn: true });
+        }
+
+        handleLogout() {
+          this.setState({ isLoggedIn: false });
+        }
 
         render() {
+          let button;
+          if (this.state.isLoggedIn) {
+            button = <ButtonLoggedIn onClick={this.handleLogout} />;
+          } else {
+            button = <ButtonLoggedOut onClick={this.handleLogin} />;
+          }
+
           return (
             <div>
-              <p>{this.state.toggle ? "teru" : "fales"}</p>
-              <button
-                onClick={this.handleClick.bind(this, "awokawokk", "awikwok")}
-              >
-                click me
-              </button>
+              <Greeting isLoggedIn={this.state.isLoggedIn} />
+              {button}
             </div>
           );
         }
       }
 
-      ReactDOM.render(<Toggle />, document.getElementById("root"));
+      ReactDOM.render(<LoginControl />, document.getElementById("root"));
     </script>
   </head>
   <body>
